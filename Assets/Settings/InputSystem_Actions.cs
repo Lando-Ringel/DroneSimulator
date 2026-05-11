@@ -109,6 +109,24 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CameraTilt"",
+                    ""type"": ""Value"",
+                    ""id"": ""c07f01c7-6b2f-44a1-a5b8-a2e21ee5037c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DropAmmo"",
+                    ""type"": ""Button"",
+                    ""id"": ""4abb80b4-1788-48a1-998f-3ba27542d087"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -274,6 +292,50 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Joystick"",
                     ""action"": ""PitchRoll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""c313c21e-e676-44e9-84ec-fc0448b0866c"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraTilt"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""583d0f46-35c5-40c5-88c4-6fb73ff59608"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraTilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""d61f96f0-9f7e-4906-b253-c7d5ea4b81ca"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraTilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1ef0ed7-7d6b-47fe-9248-5eeead63e9dc"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropAmmo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -863,6 +925,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_KamikazeDrone = asset.FindActionMap("KamikazeDrone", throwIfNotFound: true);
         m_KamikazeDrone_ThrottleYaw = m_KamikazeDrone.FindAction("ThrottleYaw", throwIfNotFound: true);
         m_KamikazeDrone_PitchRoll = m_KamikazeDrone.FindAction("PitchRoll", throwIfNotFound: true);
+        m_KamikazeDrone_CameraTilt = m_KamikazeDrone.FindAction("CameraTilt", throwIfNotFound: true);
+        m_KamikazeDrone_DropAmmo = m_KamikazeDrone.FindAction("DropAmmo", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -958,6 +1022,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private List<IKamikazeDroneActions> m_KamikazeDroneActionsCallbackInterfaces = new List<IKamikazeDroneActions>();
     private readonly InputAction m_KamikazeDrone_ThrottleYaw;
     private readonly InputAction m_KamikazeDrone_PitchRoll;
+    private readonly InputAction m_KamikazeDrone_CameraTilt;
+    private readonly InputAction m_KamikazeDrone_DropAmmo;
     /// <summary>
     /// Provides access to input actions defined in input action map "KamikazeDrone".
     /// </summary>
@@ -977,6 +1043,14 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "KamikazeDrone/PitchRoll".
         /// </summary>
         public InputAction @PitchRoll => m_Wrapper.m_KamikazeDrone_PitchRoll;
+        /// <summary>
+        /// Provides access to the underlying input action "KamikazeDrone/CameraTilt".
+        /// </summary>
+        public InputAction @CameraTilt => m_Wrapper.m_KamikazeDrone_CameraTilt;
+        /// <summary>
+        /// Provides access to the underlying input action "KamikazeDrone/DropAmmo".
+        /// </summary>
+        public InputAction @DropAmmo => m_Wrapper.m_KamikazeDrone_DropAmmo;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1009,6 +1083,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @PitchRoll.started += instance.OnPitchRoll;
             @PitchRoll.performed += instance.OnPitchRoll;
             @PitchRoll.canceled += instance.OnPitchRoll;
+            @CameraTilt.started += instance.OnCameraTilt;
+            @CameraTilt.performed += instance.OnCameraTilt;
+            @CameraTilt.canceled += instance.OnCameraTilt;
+            @DropAmmo.started += instance.OnDropAmmo;
+            @DropAmmo.performed += instance.OnDropAmmo;
+            @DropAmmo.canceled += instance.OnDropAmmo;
         }
 
         /// <summary>
@@ -1026,6 +1106,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @PitchRoll.started -= instance.OnPitchRoll;
             @PitchRoll.performed -= instance.OnPitchRoll;
             @PitchRoll.canceled -= instance.OnPitchRoll;
+            @CameraTilt.started -= instance.OnCameraTilt;
+            @CameraTilt.performed -= instance.OnCameraTilt;
+            @CameraTilt.canceled -= instance.OnCameraTilt;
+            @DropAmmo.started -= instance.OnDropAmmo;
+            @DropAmmo.performed -= instance.OnDropAmmo;
+            @DropAmmo.canceled -= instance.OnDropAmmo;
         }
 
         /// <summary>
@@ -1340,6 +1426,20 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPitchRoll(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CameraTilt" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCameraTilt(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DropAmmo" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDropAmmo(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
