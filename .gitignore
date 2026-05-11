@@ -1,0 +1,71 @@
+# =========================
+# Unity generated folders
+# =========================
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# =========================
+# Asset Store tools cache
+# =========================
+[Aa]ssets/AssetStoreTools*
+
+# =========================
+# Visual Studio / Rider / VSCode
+# =========================
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# =========================
+# Unity meta handling (keep these!)
+# =========================
+# DO NOT ignore *.meta files
+# They are required for Unity to track assets
+
+# =========================
+# OS junk
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Crash reports
+# =========================
+sysinfo.txt
+
+# =========================
+# Build artifacts
+# =========================
+*.apk
+*.aab
+*.exe
+*.app
+
+# =========================
+# Addressables cache
+# =========================
+[Aa]ssets/AddressableAssetsData/*/*.bin*
+
+# =========================
+# Shader cache
+# =========================
+ShaderCache/
+
+# =========================
+# Logs
+# =========================
+*.log
