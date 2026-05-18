@@ -71,14 +71,6 @@ namespace DroneSimulator.DroneControllers
             m_Rigidbody.linearDamping = 1f; // helps buttress against falling too fast
             m_CurrentAmmo = m_MaxAmmo;
             ReloadGrenade();
-            // m_GrenadeObj = Instantiate(m_GrenadePrefab);
-            
-            // m_GrenadeController = m_GrenadeObj.GetComponent<GrenadeController>();
-            // m_Rigidbody.mass += m_GrenadeController.Mass;
-
-            // m_GrenadeObj.transform.parent = m_GrenadeHolder;
-            // m_GrenadeObj.transform.localPosition =Vector3.zero;
-            // m_GrenadeObj.transform.localEulerAngles = new Vector3(90, 0, 0);
 
         }
         void OnEnable()
@@ -87,6 +79,11 @@ namespace DroneSimulator.DroneControllers
             m_inputSystem_Actions.KamikazeDrone.DropAmmo.performed += DropAmmoPerformed;
             m_inputSystem_Actions.KamikazeDrone.Reset.performed += ResetDrone;
             m_inputSystem_Actions.KamikazeDrone.Reload.performed += CallReloadGrenade;
+            foreach(EnemyController enemyController in FindObjectsByType<EnemyController>())
+            {
+                enemyController.OnKilled += EnemyKilled;
+                enemyController.OnHit += EnemyHit;
+            }
         }
 
         void OnDisable()
@@ -95,6 +92,12 @@ namespace DroneSimulator.DroneControllers
             m_inputSystem_Actions.KamikazeDrone.DropAmmo.performed -= DropAmmoPerformed;
             m_inputSystem_Actions.KamikazeDrone.Reset.performed -= ResetDrone;
             m_inputSystem_Actions.KamikazeDrone.Reload.performed -= CallReloadGrenade;
+            foreach(EnemyController enemyController in FindObjectsByType<EnemyController>())
+            {
+                enemyController.OnKilled -= EnemyKilled;
+                enemyController.OnHit -= EnemyHit;
+            }
+
         }
 
         void Update()
@@ -109,7 +112,6 @@ namespace DroneSimulator.DroneControllers
             RotatePropellers();
             Vector3 horizontalVector = new Vector3(m_Rigidbody.linearVelocity.x, 0, m_Rigidbody.linearVelocity.z);
             float groundSpeed = horizontalVector.magnitude;
-            // int ammo = m_GrenadeObj != null ? 1:0;
             CalculateBattery();
             fpvCanvasUIOrganizer.UpdateDroneHudText(GetAltitude(), m_Rigidbody.linearVelocity.y, groundSpeed, -m_CameraRotationX, m_CurrentBattery, m_CurrentAmmo, m_MaxAmmo, m_lifeCount);
         }
@@ -119,7 +121,7 @@ namespace DroneSimulator.DroneControllers
             ApplyFlightPhysics();
             LimitVelocity();
         }
-
+        
         // Add this to KamikazeDroneController.cs
         private void OnCollisionEnter(Collision collision)
         {
@@ -141,7 +143,17 @@ namespace DroneSimulator.DroneControllers
                 ResetDrone(default);
             }
         }
+        private void EnemyHit(EnemyController enemyController)
+        {
+            string text = $"{enemyController.EnemyType.ToString()} Hit!";
+            fpvCanvasUIOrganizer.UpdateDroneAlertText(text, Color.green);
+        }
 
+        private void EnemyKilled(EnemyController enemyController)
+        {
+            string text = $"{enemyController.EnemyType.ToString()} is Dead!";
+            fpvCanvasUIOrganizer.UpdateDroneAlertText(text, Color.green);
+        }
         // 2. The Reset Function
         public void ResetDrone(InputAction.CallbackContext context)
         {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using DroneSimulator.AttackControllers;
+using System;
 
 namespace DroneSimulator.EnemyControllers
 {
@@ -11,7 +12,17 @@ namespace DroneSimulator.EnemyControllers
             get{ return m_EnemyType; }
         }
         public  abstract void TakeDamage(AttackController attackController);
-        
+        public event Action<EnemyController> OnKilled;
+        protected void RaiseKilled()
+        {
+            OnKilled?.Invoke(this);
+        }
+        public event Action<EnemyController> OnHit;
+        protected void RaiseHit()
+        {
+            OnHit?.Invoke(this);
+        }
+
     }
     public enum EnemyControllerType
     {

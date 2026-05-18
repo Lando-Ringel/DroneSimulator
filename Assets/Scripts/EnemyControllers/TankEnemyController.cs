@@ -11,6 +11,7 @@ namespace DroneSimulator.EnemyControllers
         [Header("References")]
         [SerializeField] private Transform[] m_Wheels;
         [SerializeField] private MeshRenderer m_TankTrackRenderer;
+        [SerializeField] private Transform m_Turret;
 
         [Header("Stats")]
         [SerializeField] private float m_Health = 100f;
@@ -18,7 +19,7 @@ namespace DroneSimulator.EnemyControllers
 
         [Header("Movement")]
         [SerializeField] private float m_MoveSpeed = 3f;
-        [SerializeField] private float m_RotationSpeed = 90f;
+        [SerializeField] private float m_RotationSpeed = 60f; // Lowered slightly for realistic heavy tank mass
         [SerializeField] private float m_MinMoveTime = 2f;
         [SerializeField] private float m_MaxMoveTime = 5f;
         [SerializeField] private float m_MinIdleTime = 1f;
@@ -30,6 +31,9 @@ namespace DroneSimulator.EnemyControllers
 
         [SerializeField] private KamikazeDroneController m_PlayerDrone;
         private bool m_IsEvading; 
+
+        [Header("Turret Controls")]
+        [SerializeField] private float m_TurretLookSpeed = 120f; // Degrees per second for turret rotation
 
         [Header("Wheel Animation")]
         [SerializeField] private float m_WheelSpinSpeed = 360f;
@@ -44,10 +48,10 @@ namespace DroneSimulator.EnemyControllers
         [SerializeField] private Transform m_ParticleHoldersTransform;
         private Transform[] m_ParticleHolders;
 
-
         private Material m_TrackMaterial;
         private bool m_IsMoving;
         private float m_TrackOffset;
+        private Vector3 m_CurrentEvadeDirection;
 
         private void Awake()
         {
@@ -71,6 +75,7 @@ namespace DroneSimulator.EnemyControllers
                 return;
 
             HandleEvade();
+            HandleTurretTracking();
 
             if (m_IsMoving)
             {
@@ -88,50 +93,82 @@ namespace DroneSimulator.EnemyControllers
             Vector3 flatPlayerPos = m_PlayerDrone.transform.position;
             flatPlayerPos.y = transform.position.y;
 
-            float distance = Vector3.Distance(
-                transform.position,
-                flatPlayerPos
-            );
-
+            float distance = Vector3.Distance(transform.position, flatPlayerPos);
             m_IsEvading = distance <= m_EvadeDistance;
 
             if (!m_IsEvading)
                 return;
 
-            m_IsMoving = true;
+            // Calculate direction directly away from the player drone
+            m_CurrentEvadeDirection = (transform.position - flatPlayerPos).normalized;
 
-            Vector3 evadeDirection =
-                (transform.position - flatPlayerPos).normalized;
-
-            if (evadeDirection != Vector3.zero)
+            if (m_CurrentEvadeDirection != Vector3.zero)
             {
-                Quaternion targetRotation =
-                    Quaternion.LookRotation(evadeDirection);
-
+                Quaternion targetRotation = Quaternion.LookRotation(m_CurrentEvadeDirection);
+                
+                // Smoothly rotate the hull toward the escape direction
                 transform.rotation = Quaternion.RotateTowards(
                     transform.rotation,
                     targetRotation,
-                    m_RotationSpeed * 2f * Time.deltaTime
+                    m_RotationSpeed * m_EvadeSpeedMultiplier * Time.deltaTime
                 );
+
+                // REALISM FIX: Only allow forward driving if the tank is mostly facing its escape trajectory.
+                // This prevents the tank from awkwardly sliding sideways/drifting while turning around.
+                float angleToEscape = Quaternion.Angle(transform.rotation, targetRotation);
+                m_IsMoving = angleToEscape < 45f; 
             }
+        }
+
+        private void HandleTurretTracking()
+        {
+            // If the turret is missing or there is no target drone, let it smoothly return to center
+            if (m_Turret == null) return;
+
+            Quaternion targetTurretRotation;
+
+            if (m_PlayerDrone != null && Vector3.Distance(transform.position, m_PlayerDrone.transform.position) <= m_EvadeDistance * 1.5f)
+            {
+                // Track the player drone dynamically on a flat 2D plain (locks turret pitch pitch)
+                Vector3 targetDir = m_PlayerDrone.transform.position - m_Turret.position;
+                targetDir.y = 0f; 
+
+                if (targetDir != Vector3.zero)
+                {
+                    targetTurretRotation = Quaternion.LookRotation(targetDir);
+                    m_Turret.rotation = Quaternion.RotateTowards(
+                        m_Turret.rotation, 
+                        targetTurretRotation, 
+                        m_TurretLookSpeed * Time.deltaTime
+                    );
+                    return;
+                }
+            }
+
+            // Return to facing forward relative to the chassis if no targets are nearby
+            targetTurretRotation = Quaternion.LookRotation(transform.forward);
+            m_Turret.rotation = Quaternion.RotateTowards(
+                m_Turret.rotation, 
+                targetTurretRotation, 
+                m_TurretLookSpeed * 0.5f * Time.deltaTime
+            );
         }
 
         private IEnumerator RandomWalkRoutine()
         {
             while (true)
             {
-                // If we are evading, pause the random walk state machine loops
                 if (m_IsEvading)
                 {
                     yield return null;
                     continue;
                 }
 
-                // Pick random direction
                 float randomYRotation = Random.Range(0f, 360f);
                 Quaternion targetRotation = Quaternion.Euler(0f, randomYRotation, 0f);
 
-                // Rotate toward direction
+                // Pivot in place to face target direction before driving
+                m_IsMoving = false; 
                 while (Quaternion.Angle(transform.rotation, targetRotation) > 1f && !m_IsEvading)
                 {
                     transform.rotation = Quaternion.RotateTowards(
@@ -143,7 +180,6 @@ namespace DroneSimulator.EnemyControllers
                     yield return null;
                 }
 
-                // Begin movement
                 if (!m_IsEvading)
                 {
                     m_IsMoving = true;
@@ -152,14 +188,12 @@ namespace DroneSimulator.EnemyControllers
                 float moveDuration = Random.Range(m_MinMoveTime, m_MaxMoveTime);
                 float moveTimer = 0f;
                 
-                // Instead of a hard WaitForSeconds, we yield smoothly so evade can interrupt immediately
                 while (moveTimer < moveDuration && !m_IsEvading)
                 {
                     moveTimer += Time.deltaTime;
                     yield return null;
                 }
 
-                // Stop movement
                 if (!m_IsEvading)
                 {
                     m_IsMoving = false;
@@ -179,11 +213,7 @@ namespace DroneSimulator.EnemyControllers
         private void Move()
         {
             float speed = m_MoveSpeed;
-
-            if (m_IsEvading)
-            {
-                speed *= m_EvadeSpeedMultiplier;
-            }
+            if (m_IsEvading) speed *= m_EvadeSpeedMultiplier;
 
             transform.position += transform.forward * speed * Time.deltaTime;
         }
@@ -193,7 +223,7 @@ namespace DroneSimulator.EnemyControllers
             if (m_Wheels == null) return;
 
             float spinAmount = m_WheelSpinSpeed * Time.deltaTime;
-            if (m_IsEvading) spinAmount *= m_EvadeSpeedMultiplier; // Match visual to speed boost
+            if (m_IsEvading) spinAmount *= m_EvadeSpeedMultiplier;
 
             for (int i = 0; i < m_Wheels.Length; i++)
             {
@@ -228,7 +258,6 @@ namespace DroneSimulator.EnemyControllers
 
             if (m_Health <= 0f)
             {
-                Debug.Log("Dead!");
                 m_IsDead = true;
                 m_IsMoving = false;
                 m_IsEvading = false;
@@ -239,10 +268,10 @@ namespace DroneSimulator.EnemyControllers
                     Quaternion.identity,
                     closestHolder
                 );
+                RaiseKilled();
             }
             else
             {
-                Debug.Log("Take Damage!");
                 GameObject smokeParticleObj = Instantiate(
                     m_smokeParticlePrefab,
                     spawnPosition,
@@ -250,6 +279,7 @@ namespace DroneSimulator.EnemyControllers
                     closestHolder
                 );
                 m_ActiveSmokeParticles.Add(smokeParticleObj);
+                RaiseHit();
             }
         }
 
@@ -277,7 +307,6 @@ namespace DroneSimulator.EnemyControllers
             Gizmos.color = Color.red;
             Gizmos.DrawRay(transform.position + Vector3.up, transform.forward * 3f);
             
-            // Helpful visualization for your evasion radius in editor
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, m_EvadeDistance);
         }
