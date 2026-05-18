@@ -127,6 +127,24 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9e9d0e4-aa4c-4658-9e44-648eab83c859"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ce70009-bda9-4246-b0e1-c451919799f8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -336,6 +354,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DropAmmo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f2e4666-0cb3-404a-aef9-867cc959f9a3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc6352bc-9756-4b3e-8f39-0f4c0036f859"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -927,6 +967,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_KamikazeDrone_PitchRoll = m_KamikazeDrone.FindAction("PitchRoll", throwIfNotFound: true);
         m_KamikazeDrone_CameraTilt = m_KamikazeDrone.FindAction("CameraTilt", throwIfNotFound: true);
         m_KamikazeDrone_DropAmmo = m_KamikazeDrone.FindAction("DropAmmo", throwIfNotFound: true);
+        m_KamikazeDrone_Reset = m_KamikazeDrone.FindAction("Reset", throwIfNotFound: true);
+        m_KamikazeDrone_Reload = m_KamikazeDrone.FindAction("Reload", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1024,6 +1066,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_KamikazeDrone_PitchRoll;
     private readonly InputAction m_KamikazeDrone_CameraTilt;
     private readonly InputAction m_KamikazeDrone_DropAmmo;
+    private readonly InputAction m_KamikazeDrone_Reset;
+    private readonly InputAction m_KamikazeDrone_Reload;
     /// <summary>
     /// Provides access to input actions defined in input action map "KamikazeDrone".
     /// </summary>
@@ -1051,6 +1095,14 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "KamikazeDrone/DropAmmo".
         /// </summary>
         public InputAction @DropAmmo => m_Wrapper.m_KamikazeDrone_DropAmmo;
+        /// <summary>
+        /// Provides access to the underlying input action "KamikazeDrone/Reset".
+        /// </summary>
+        public InputAction @Reset => m_Wrapper.m_KamikazeDrone_Reset;
+        /// <summary>
+        /// Provides access to the underlying input action "KamikazeDrone/Reload".
+        /// </summary>
+        public InputAction @Reload => m_Wrapper.m_KamikazeDrone_Reload;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1089,6 +1141,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @DropAmmo.started += instance.OnDropAmmo;
             @DropAmmo.performed += instance.OnDropAmmo;
             @DropAmmo.canceled += instance.OnDropAmmo;
+            @Reset.started += instance.OnReset;
+            @Reset.performed += instance.OnReset;
+            @Reset.canceled += instance.OnReset;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         /// <summary>
@@ -1112,6 +1170,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @DropAmmo.started -= instance.OnDropAmmo;
             @DropAmmo.performed -= instance.OnDropAmmo;
             @DropAmmo.canceled -= instance.OnDropAmmo;
+            @Reset.started -= instance.OnReset;
+            @Reset.performed -= instance.OnReset;
+            @Reset.canceled -= instance.OnReset;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         /// <summary>
@@ -1440,6 +1504,20 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDropAmmo(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Reset" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReset(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Reload" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReload(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
