@@ -43,6 +43,7 @@ namespace DroneSimulator.DroneControllers
         private GrenadeController m_GrenadeController;
         [Header("Combat")]
         private LayerMask m_EnemyLayerMask;
+        private LayerMask m_ObjectLayerMask;
         private int m_lifeCount;
         [Header("Canvas")]
         [SerializeField] private FPVCanvasUIOrganizer fpvCanvasUIOrganizer;
@@ -65,6 +66,7 @@ namespace DroneSimulator.DroneControllers
             m_StartPosition = transform.position;
             m_StartRotation = transform.rotation;
             m_EnemyLayerMask = LayerMask.NameToLayer("Enemy");
+            m_ObjectLayerMask = LayerMask.NameToLayer("Object");
             m_inputSystem_Actions = new InputSystem_Actions();
             m_Rigidbody = GetComponent<Rigidbody>();
             m_Rigidbody.angularDamping = 2f;
@@ -79,11 +81,11 @@ namespace DroneSimulator.DroneControllers
             m_inputSystem_Actions.KamikazeDrone.DropAmmo.performed += DropAmmoPerformed;
             m_inputSystem_Actions.KamikazeDrone.Reset.performed += ResetDrone;
             m_inputSystem_Actions.KamikazeDrone.Reload.performed += CallReloadGrenade;
-            foreach(EnemyController enemyController in FindObjectsByType<EnemyController>())
-            {
-                enemyController.OnKilled += EnemyKilled;
-                enemyController.OnHit += EnemyHit;
-            }
+            // foreach(EnemyController enemyController in FindObjectsByType<EnemyController>())
+            // {
+            //     enemyController.OnKilled += EnemyKilled;
+            //     enemyController.OnHit += EnemyHit;
+            // }
         }
 
         void OnDisable()
@@ -92,11 +94,11 @@ namespace DroneSimulator.DroneControllers
             m_inputSystem_Actions.KamikazeDrone.DropAmmo.performed -= DropAmmoPerformed;
             m_inputSystem_Actions.KamikazeDrone.Reset.performed -= ResetDrone;
             m_inputSystem_Actions.KamikazeDrone.Reload.performed -= CallReloadGrenade;
-            foreach(EnemyController enemyController in FindObjectsByType<EnemyController>())
-            {
-                enemyController.OnKilled -= EnemyKilled;
-                enemyController.OnHit -= EnemyHit;
-            }
+            // foreach(EnemyController enemyController in FindObjectsByType<EnemyController>())
+            // {
+            //     enemyController.OnKilled -= EnemyKilled;
+            //     enemyController.OnHit -= EnemyHit;
+            // }
 
         }
 
@@ -125,8 +127,11 @@ namespace DroneSimulator.DroneControllers
         // Add this to KamikazeDroneController.cs
         private void OnCollisionEnter(Collision collision)
         {
-            // If we are carrying a grenade and hit something hard enough
-            if (m_GrenadeObj != null && collision.relativeVelocity.magnitude > m_ExplosionCollisionVelocity)
+            if(collision.gameObject.layer == m_ObjectLayerMask)
+            {
+
+            }
+            else if (m_GrenadeObj != null && collision.relativeVelocity.magnitude > m_ExplosionCollisionVelocity)
             {
                 // 1. Trigger the grenade explosion at the point of impact
                 m_GrenadeController.Explode(collision.contacts[0].point);                
@@ -143,13 +148,13 @@ namespace DroneSimulator.DroneControllers
                 ResetDrone(default);
             }
         }
-        private void EnemyHit(EnemyController enemyController)
+        public override void EnemyHit(EnemyController enemyController)
         {
             string text = $"{enemyController.EnemyType.ToString()} Hit!";
             fpvCanvasUIOrganizer.UpdateDroneAlertText(text, Color.green);
         }
 
-        private void EnemyKilled(EnemyController enemyController)
+        public override void EnemyKilled(EnemyController enemyController)
         {
             string text = $"{enemyController.EnemyType.ToString()} is Dead!";
             fpvCanvasUIOrganizer.UpdateDroneAlertText(text, Color.green);

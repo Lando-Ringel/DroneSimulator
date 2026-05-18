@@ -5,5 +5,5 @@ AssetOrigin:
   productId: 5669
   packageName: War FX
   packageVersion: 1.8.04
-  assetPath: Assets/ParticleSystems/Explosions/Shaders/WFX_S Alpha-Diffuse TintColor.shader
+  assetPath: Assets/ParticleSystems/_Shaders/WFX_S Alpha-Diffuse TintColor.shader
   uploadId: 301034

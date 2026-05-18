@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7892381868173140174}
   m_Layer: 6
-  m_Name: FrontParticleHolder
+  m_Name: FrontMiddleParticleHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,22 +98,24 @@ MonoBehaviour:
   - {fileID: 5817464826614169420}
   - {fileID: 5817464826614169422}
   m_TankTrackRenderer: {fileID: 3029989263591553440}
+  m_Turret: {fileID: 5817464826614169456}
   m_Health: 10
-  m_MoveSpeed: 3
+  m_MoveSpeed: 2
   m_RotationSpeed: 90
   m_MinMoveTime: 2
   m_MaxMoveTime: 5
   m_MinIdleTime: 1
   m_MaxIdleTime: 3
-  m_EvadeDistance: 4
-  m_EvadeMoveTime: 5
-  m_EvadeSpeedMultiplier: 1
+  m_EvadeDistance: 7
+  m_EvadeSpeedMultiplier: 1.24
   m_PlayerDrone: {fileID: 0}
+  m_TurretLookSpeed: 120
   m_WheelSpinSpeed: 360
   m_TrackScrollSpeed: 1.5
   m_fireParticlePrefab: {fileID: 4122213003545672151, guid: a73478fa15f249a43a7f6e91c4349b63, type: 3}
   m_smokeParticlePrefab: {fileID: 6446781554083151525, guid: 7cac4e28673e045428f484129ea4dc58, type: 3}
   m_FireParticleOffset: {x: 0, y: -1.5, z: 0}
+  m_ParticleHoldersTransform: {fileID: 1826545088775061323}
 --- !u!65 &544488126781218604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -166,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1255099838652348308}
   m_Layer: 6
-  m_Name: MiddleParticleHolder
+  m_Name: MiddleMiddleParticleHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5283613900104617264}
   m_Layer: 6
-  m_Name: BackParticleHolder
+  m_Name: BackMiddleParticleHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -686,6 +688,11 @@ Transform:
 --- !u!4 &5817464826614169438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400014, guid: 6118207091096d94482fb6be313ac6fc, type: 3}
+  m_PrefabInstance: {fileID: 5817464826614293968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5817464826614169456 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400032, guid: 6118207091096d94482fb6be313ac6fc, type: 3}
   m_PrefabInstance: {fileID: 5817464826614293968}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5817464826614169460 stripped

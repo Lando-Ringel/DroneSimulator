@@ -1,20 +1,19 @@
 using UnityEngine;
 using DroneSimulator.AttackControllers;
+using System;
 
 namespace DroneSimulator.ObjectControllers
 {
     public abstract class ObjectController : MonoBehaviour
     {
-        [SerializeField] private ObjectControllerType m_EnemyType;
-        public ObjectControllerType EnemyType
+        [SerializeField] private ObjectControllerType m_ObjectType;
+        public ObjectControllerType ObjectType
         {
-            get{ return m_EnemyType; }
+            get{ return m_ObjectType; }
         }
-        public  abstract void TakeDamage(AttackController attackController);
-        
     }
     public enum ObjectControllerType
     {
-        Restock
+        SpawnPad
     }
 }
