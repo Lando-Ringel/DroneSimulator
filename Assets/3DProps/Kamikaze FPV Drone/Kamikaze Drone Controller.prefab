@@ -744,8 +744,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22eeed76ba8579d4784f237700c4c45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KamikazeDroneController
+  m_ReplayModelPrefab: {fileID: 5594078036998244263, guid: 190566f265b59eb4bb407ff3f5ea039b, type: 3}
+  m_Model3D: {fileID: 6697248929760923812}
   m_DroneType: 0
   m_Camera: {fileID: 2036395740773961433}
+  m_AttackPrefab: {fileID: 7510066098918893103, guid: db5a842cee47a954babe94230e468493, type: 3}
   m_CameraTiltSpeed: 50
   m_MinTilt: -60
   m_MaxTilt: 60
@@ -765,13 +768,12 @@ MonoBehaviour:
   m_DrainEfficiency: 1
   m_ThrottleLerpSpeed: 2
   m_YawLerpSpeed: 4
-  m_GrenadePrefab: {fileID: 7510066098918893103, guid: db5a842cee47a954babe94230e468493, type: 3}
   m_GrenadeHolder: {fileID: 7230364016794566071}
   m_LeftClaw: {fileID: 3407208589849658007}
   m_RightClaw: {fileID: 1167829383563442186}
   m_ExplosionCollisionVelocity: 4.75
   m_MaxAmmo: 3
-  fpvCanvasUIOrganizer: {fileID: 8979110976000773409}
+  m_FPVCanvasUIOrganizer: {fileID: 8979110976000773409}
 --- !u!65 &4808876185672186865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1072,6 +1074,11 @@ Transform:
 --- !u!4 &6606480831884736577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8386002764154251852, guid: 0769a30afcdc21845a8b6a383c12b675, type: 3}
+  m_PrefabInstance: {fileID: 5778120224097103349}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6697248929760923812 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0769a30afcdc21845a8b6a383c12b675, type: 3}
   m_PrefabInstance: {fileID: 5778120224097103349}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7756861510622630800 stripped

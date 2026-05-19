@@ -83,6 +83,7 @@ namespace DroneSimulator.EnemyControllers
                 AnimateWheels();
                 AnimateTracks();
             }
+            RecordState();
         }
 
         private void HandleEvade()
