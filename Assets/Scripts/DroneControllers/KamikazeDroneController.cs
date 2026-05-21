@@ -4,7 +4,9 @@ using System.Collections;
 using DroneSimulator.UI;
 using DroneSimulator.AttackControllers;
 using DroneSimulator.EnemyControllers;
+using DroneSimulator.SceneManagers;
 using System.Collections.Generic;
+using PSXShadersPro.URP.Demo;
 
 namespace DroneSimulator.DroneControllers
 {
@@ -23,6 +25,18 @@ namespace DroneSimulator.DroneControllers
         [SerializeField] private float m_YawStrength = 5f;
         [SerializeField] private float m_PitchStrength = 10f;
         [SerializeField] private float m_RollStrength = 10f;
+        [SerializeField] private float m_AcroAngularDampening = 2f;
+        [SerializeField] private float m_AcroLinearDampening = 1f;
+        [Header("Angle Settings")]
+        [SerializeField] private float m_MaxAngleTilt = 35f;
+        [SerializeField] private float m_AngleResponsiveness = 5f;
+        [SerializeField] private float m_SelfLevelStrength = 3f;
+        [SerializeField] private float m_MoveForce = 5f;
+        [SerializeField] private float m_AngleAngularDampening = 8f;
+        [SerializeField] private float m_AngleLinearDampening = 2f;
+        [SerializeField] private float m_AngleThrottleMult = 1.45f;
+        [SerializeField] private float m_AngleYawStrengthMult = 2.1f;
+
         [Header("Battery Settings")]
         [SerializeField] private float m_BaseDrainRate = 0.5f;
         [SerializeField] private float m_DrainEfficiency = 1.0f;
@@ -32,7 +46,6 @@ namespace DroneSimulator.DroneControllers
         [SerializeField] private float m_ThrottleLerpSpeed = 2f;
         [SerializeField] private float m_YawLerpSpeed = 4f;
         [Header("Grenade")]
-
         [SerializeField] private Transform m_GrenadeHolder;
         [SerializeField] private Transform m_LeftClaw;
         [SerializeField] private Transform m_RightClaw;
@@ -43,13 +56,10 @@ namespace DroneSimulator.DroneControllers
         private GrenadeController m_GrenadeController;
         [Header("Combat")]
         private LayerMask m_EnemyLayerMask;
-        private LayerMask m_ObjectLayerMask;
         private int m_lifeCount;
-
         [Header("Canvas")]
         [SerializeField] private FPVCanvasUIOrganizer m_FPVCanvasUIOrganizer;
-        private InputSystem_Actions m_inputSystem_Actions;
-        private Rigidbody m_Rigidbody;
+
         private Vector3 m_StartPosition;
         private Quaternion m_StartRotation;
         // input storage
@@ -65,40 +75,40 @@ namespace DroneSimulator.DroneControllers
             m_StartPosition = transform.position;
             m_StartRotation = transform.rotation;
             m_EnemyLayerMask = LayerMask.NameToLayer("Enemy");
-            m_ObjectLayerMask = LayerMask.NameToLayer("Object");
-            m_inputSystem_Actions = new InputSystem_Actions();
+
             m_Rigidbody = GetComponent<Rigidbody>();
-            m_Rigidbody.angularDamping = 2f;
-            m_Rigidbody.linearDamping = 1f; // helps buttress against falling too fast
+            // m_Rigidbody.angularDamping = 2f;
+            // m_Rigidbody.linearDamping = 1f; // helps buttress against falling too fast
+            SetFlightMode(FlightMode.Angle);
             LoadAmmo();
         }
 
-        void OnEnable()
+        public override void InitializePlayerController(InputSystem_Actions inputSystem_Actions)
         {
-            m_inputSystem_Actions.KamikazeDrone.Enable();
-            m_inputSystem_Actions.KamikazeDrone.DropAmmo.performed += DropAmmoPerformed;
-            m_inputSystem_Actions.KamikazeDrone.Reset.performed += ResetDrone;
-            m_inputSystem_Actions.KamikazeDrone.Reload.performed += CallReloadGrenade;
-        }
-
-        void OnDisable()
-        {
-            m_inputSystem_Actions.KamikazeDrone.Disable();
-            m_inputSystem_Actions.KamikazeDrone.DropAmmo.performed -= DropAmmoPerformed;
-            m_inputSystem_Actions.KamikazeDrone.Reset.performed -= ResetDrone;
-            m_inputSystem_Actions.KamikazeDrone.Reload.performed -= CallReloadGrenade;
+            m_IsInitialized = true;
+            m_inputSystem_Actions = inputSystem_Actions;
+            m_inputSystem_Actions.DroneInput.Enable();
+            m_Rigidbody.isKinematic = false;
+            m_inputSystem_Actions.DroneInput.DropAmmo.performed += DropAmmoPerformed;
+            m_inputSystem_Actions.DroneInput.Reset.performed += CallResetDrone;
+            m_inputSystem_Actions.DroneInput.Reload.performed += CallReloadGrenade;
+            m_inputSystem_Actions.DroneInput.ToggleFlightMode.performed += ToggleFlightMode;
         }
 
         void Update()
         {
-            Vector2 throttleYaw = m_inputSystem_Actions.KamikazeDrone.ThrottleYaw.ReadValue<Vector2>();
-            Vector2 pitchRoll = m_inputSystem_Actions.KamikazeDrone.PitchRoll.ReadValue<Vector2>();
+            if(m_IsDead || m_IsPaused)
+                return;
+
+            Vector2 throttleYaw = m_inputSystem_Actions.DroneInput.ThrottleYaw.ReadValue<Vector2>();
+            Vector2 pitchRoll = m_inputSystem_Actions.DroneInput.PitchRoll.ReadValue<Vector2>();
+
             m_PitchInput = pitchRoll.y;
             m_RollInput = pitchRoll.x;
             m_ThrottleInput = Mathf.MoveTowards(m_ThrottleInput, throttleYaw.y, Time.deltaTime * m_ThrottleLerpSpeed);
             m_YawInput = Mathf.MoveTowards(m_YawInput, throttleYaw.x, Time.deltaTime * m_YawLerpSpeed);
             HandleCameraRotation();
-            RotatePropellers();
+            
             Vector3 horizontalVector = new Vector3(m_Rigidbody.linearVelocity.x, 0, m_Rigidbody.linearVelocity.z);
             float groundSpeed = horizontalVector.magnitude;
             CalculateBattery();
@@ -109,19 +119,31 @@ namespace DroneSimulator.DroneControllers
 
         void FixedUpdate()
         {
-            ApplyFlightPhysics();
+            if(m_IsDead || m_IsPaused)
+                return;
+
+            // ApplyFlightPhysics();
+            switch(m_FlightMode)
+            {
+                case FlightMode.Acro:
+                    ApplyAcroPhysics();
+                    RotateAcroPropellers();
+                    break;
+
+                case FlightMode.Angle:
+                    ApplyAnglePhysics();
+                    RotateAnglePropellers();
+                    break;
+            }            
             LimitVelocity();
         }
         
         // Add this to KamikazeDroneController.cs
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.relativeVelocity.magnitude > m_ExplosionCollisionVelocity)
+            if (!m_IsPaused && collision.relativeVelocity.magnitude > m_ExplosionCollisionVelocity)
             {
-                gameObject.SetActive(false);
-                
                 // 1. Trigger the grenade explosion at the point of impact
-                // m_GrenadeController.Explode(collision.contacts[0].point);                
                 if(collision.gameObject.layer == m_EnemyLayerMask && collision.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyController))
                 {
                     RaiseKilled(enemyController);
@@ -132,7 +154,20 @@ namespace DroneSimulator.DroneControllers
                 }
             }
         }
-
+        public override void PauseController()
+        {
+            if(m_IsPaused)
+            {
+                m_IsPaused = false;
+                m_inputSystem_Actions.DroneInput.Enable();
+            }
+            else
+            {
+                m_IsPaused = true;
+                m_inputSystem_Actions.DroneInput.Disable();
+                
+            }
+        }
         public override void EnemyHit(EnemyController enemyController)
         {
             string text = $"{enemyController.EnemyType.ToString()} Hit!";
@@ -144,14 +179,19 @@ namespace DroneSimulator.DroneControllers
             string text = $"{enemyController.EnemyType.ToString()} is Dead!";
             m_FPVCanvasUIOrganizer.UpdateDroneAlertText(text, Color.green);
         }
+        private void CallResetDrone(InputAction.CallbackContext context)
+        {
+            ResetDrone();
+        }
 
         // 2. The Reset Function
-        public override void ResetDrone(InputAction.CallbackContext context)
+        public override void ResetDrone()
         {
             m_lifeCount++;
             // Stop all movement immediately
             m_Rigidbody.linearVelocity = Vector3.zero;
             m_Rigidbody.angularVelocity = Vector3.zero;
+            m_Rigidbody.isKinematic = false;
             // Reset Transform
             transform.position = m_StartPosition;
             transform.rotation = m_StartRotation;
@@ -159,8 +199,48 @@ namespace DroneSimulator.DroneControllers
             m_Model3D.SetActive(true);
             // Reset Inputs and Battery
             LoadAmmo();
-            gameObject.SetActive(true);
         }
+        private void ToggleFlightMode(InputAction.CallbackContext context)
+        {
+            if(m_FlightMode == FlightMode.Acro)
+            {
+                SetFlightMode(FlightMode.Angle);
+            }
+            else
+            {
+                SetFlightMode(FlightMode.Acro);
+            }
+        }        
+        private void SetFlightMode(FlightMode newMode)
+        {
+            m_FlightMode = newMode;
+
+            switch(m_FlightMode)
+            {
+                case FlightMode.Acro:
+
+                    m_Rigidbody.angularDamping = m_AcroAngularDampening;
+                    m_Rigidbody.linearDamping = m_AcroLinearDampening;
+
+                    m_FPVCanvasUIOrganizer.UpdateDroneAlertText(
+                        "ACRO MODE",
+                        Color.red
+                    );
+
+                    break;
+
+                case FlightMode.Angle:
+                    m_Rigidbody.angularDamping = m_AngleAngularDampening;
+                    m_Rigidbody.linearDamping = m_AngleLinearDampening;                    
+
+                    m_FPVCanvasUIOrganizer.UpdateDroneAlertText(
+                        "ANGLE MODE",
+                        Color.cyan
+                    );
+
+                    break;
+            }
+        }        
 
         public override void LoadAmmo(string alertText = "")
         {
@@ -275,7 +355,7 @@ namespace DroneSimulator.DroneControllers
         // Update is called once per frame
         private void HandleCameraRotation()
         {
-            float m_CameraInput = m_inputSystem_Actions.KamikazeDrone.CameraTilt.ReadValue<float>();
+            float m_CameraInput = m_inputSystem_Actions.DroneInput.CameraTilt.ReadValue<float>();
             m_CameraRotationX += m_CameraInput * m_CameraTiltSpeed * Time.deltaTime;
             m_CameraRotationX = Mathf.Clamp(m_CameraRotationX, m_MinTilt, m_MaxTilt);
             m_Camera.localEulerAngles = new Vector3(m_CameraRotationX, 0, 0);
@@ -300,22 +380,71 @@ namespace DroneSimulator.DroneControllers
             m_CurrentBattery -= totalDrain * Time.deltaTime;
         }
 
-        private void ApplyFlightPhysics()
+        private void ApplyAcroPhysics()
         {
             float extraForce = 0f;
             if(m_ThrottleInput > .01f)
             {
-                // The floor: Counteract gravity so the drone feels weightless while throttled.
                 extraForce = Physics.gravity.magnitude;
             }
             float totalThrottle = (m_ThrottleInput * m_ThrottleMultiplier) + extraForce;
-            m_Rigidbody.AddRelativeForce(Vector3.up * totalThrottle, ForceMode.Acceleration);
-            Vector3 torque = new Vector3(
-                -m_PitchInput * m_PitchStrength, 
-                m_YawInput * m_YawStrength,
-                -m_RollInput*m_RollStrength
+            m_Rigidbody.AddRelativeForce(
+                Vector3.up * totalThrottle,
+                ForceMode.Acceleration
             );
-            m_Rigidbody.AddRelativeTorque(torque, ForceMode.Acceleration);
+            Vector3 torque = new Vector3(
+                -m_PitchInput * m_PitchStrength,
+                m_YawInput * m_YawStrength,
+                -m_RollInput * m_RollStrength
+            );
+            m_Rigidbody.AddRelativeTorque(
+                torque,
+                ForceMode.Acceleration
+            );
+        }
+
+        private void ApplyAnglePhysics()
+        {
+            // HOVER
+            float hoverForce = Physics.gravity.magnitude + (m_ThrottleInput * m_ThrottleMultiplier * m_AngleThrottleMult);
+            m_Rigidbody.AddForce(
+                Vector3.up * hoverForce,
+                ForceMode.Acceleration
+            );
+            Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
+            Vector3 right = Vector3.ProjectOnPlane(transform.right, Vector3.up).normalized;
+            Vector3 moveDirection =
+                (forward * m_PitchInput) +
+                (right * m_RollInput);
+            m_Rigidbody.AddForce(
+                moveDirection * m_MoveForce,
+                ForceMode.Acceleration
+            );
+            // TARGET VISUAL TILT
+            float targetPitch = Mathf.Clamp(m_PitchInput, -1, 1) * m_MaxAngleTilt;
+            float targetRoll = -Mathf.Clamp(m_RollInput, -1, 1) * m_MaxAngleTilt;
+            Vector3 currentRotation = transform.localEulerAngles;
+            float currentPitch = NormalizeAngle(currentRotation.x);
+            float currentRoll = NormalizeAngle(currentRotation.z);
+            float pitchError = targetPitch - currentPitch;
+            float rollError = targetRoll - currentRoll;
+            Vector3 torque = new Vector3(
+                pitchError * m_AngleResponsiveness,
+                m_YawInput * m_YawStrength*m_AngleYawStrengthMult,
+                rollError * m_AngleResponsiveness
+            );
+            m_Rigidbody.AddRelativeTorque(
+                torque,
+                ForceMode.Acceleration
+            );
+        }
+
+        private float NormalizeAngle(float angle)
+        {
+            if(angle > 180f)
+                angle -= 360f;
+
+            return angle;
         }
 
         private void LimitVelocity()
@@ -327,7 +456,7 @@ namespace DroneSimulator.DroneControllers
             m_Rigidbody.linearVelocity = vel;
         }    
 
-        private void RotatePropellers()
+        private void RotateAcroPropellers()
         {
             // Ensure the speed is always positive so they don't spin backward
             float currentSpinSpeed = (Mathf.Abs(m_ThrottleInput) * m_MaxPropellerSpeed) + 200f;
@@ -339,6 +468,20 @@ namespace DroneSimulator.DroneControllers
                 prop.Rotate(Vector3.up * currentSpinSpeed * direction * Time.deltaTime, Space.Self);
             }
         }
+        private void RotateAnglePropellers()
+        {
+            // Ensure the speed is always positive so they don't spin backward
+            float propSpeed = Mathf.Abs(m_PitchInput)*.5f + Mathf.Abs(m_ThrottleInput)*.5f;
+            float currentSpinSpeed = (propSpeed * m_MaxPropellerSpeed) + m_MaxPropellerSpeed/3 + 200f;
+            for (int i = 0; i < m_Propellers.Length; i++)
+            {
+                Transform prop = m_Propellers[i];
+                float direction = (i % 2 == 0) ? 1f : -1f;
+                // Change Vector3.up to whichever axis points 'out' of the motor in your model
+                prop.Rotate(Vector3.up * currentSpinSpeed * direction * Time.deltaTime, Space.Self);
+            }
+        }
+
     }
 
 }

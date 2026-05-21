@@ -42,7 +42,7 @@ namespace DroneSimulator.AttackControllers
                     Explode(collision.contacts[0].point);
                     if(collision.gameObject.layer == m_EnemyLayerMask && collision.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyController))
                     {
-                        enemyController.TakeDamage(this);
+                        enemyController.TakeDamage(this, transform.position);
                     }
                 }
             }

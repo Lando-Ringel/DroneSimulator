@@ -89,7 +89,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     ""name"": ""InputSystem_Actions"",
     ""maps"": [
         {
-            ""name"": ""KamikazeDrone"",
+            ""name"": ""DroneInput"",
             ""id"": ""df70fa95-8a34-4494-b137-73ab6b9c7d37"",
             ""actions"": [
                 {
@@ -145,6 +145,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleFlightMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""efccab2e-b561-4a64-82c6-d58ede79751b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -182,31 +191,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""8180e8bd-4097-4f4e-ab88-4523101a6ce9"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""ThrottleYaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""down"",
                     ""id"": ""320bffee-a40b-4347-ac70-c210eb8bc73a"",
                     ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""ThrottleYaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1c5327b5-f71c-4f60-99c7-4e737386f1d1"",
-                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -226,17 +213,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
-                    ""id"": ""2e46982e-44cc-431b-9f0b-c11910bf467a"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""ThrottleYaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""right"",
                     ""id"": ""fcfe95b8-67b9-4526-84b5-5d0bc98d6400"",
                     ""path"": ""<Keyboard>/d"",
@@ -246,28 +222,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""ThrottleYaw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""77bff152-3580-4b21-b6de-dcd0c7e41164"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""ThrottleYaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1635d3fe-58b6-4ba9-a4e2-f4b964f6b5c8"",
-                    ""path"": ""<XRController>/{Primary2DAxis}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""ThrottleYaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -312,6 +266,61 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""PitchRoll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""eb680ded-94ef-45a4-bd22-1e210c9a887d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PitchRoll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""bdd87022-c68b-4982-841c-e086ec495169"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PitchRoll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8712afab-c00e-4124-96cb-141fa2e03c91"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PitchRoll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""836df18a-779b-4fdb-9d16-cae512c562c3"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PitchRoll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""2f2e1c8d-8555-48cb-b6f1-58acd146c366"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PitchRoll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""1D Axis"",
@@ -376,6 +385,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3040ca3b-436b-493d-9a01-4a775b279ad5"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleFlightMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -961,14 +981,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // KamikazeDrone
-        m_KamikazeDrone = asset.FindActionMap("KamikazeDrone", throwIfNotFound: true);
-        m_KamikazeDrone_ThrottleYaw = m_KamikazeDrone.FindAction("ThrottleYaw", throwIfNotFound: true);
-        m_KamikazeDrone_PitchRoll = m_KamikazeDrone.FindAction("PitchRoll", throwIfNotFound: true);
-        m_KamikazeDrone_CameraTilt = m_KamikazeDrone.FindAction("CameraTilt", throwIfNotFound: true);
-        m_KamikazeDrone_DropAmmo = m_KamikazeDrone.FindAction("DropAmmo", throwIfNotFound: true);
-        m_KamikazeDrone_Reset = m_KamikazeDrone.FindAction("Reset", throwIfNotFound: true);
-        m_KamikazeDrone_Reload = m_KamikazeDrone.FindAction("Reload", throwIfNotFound: true);
+        // DroneInput
+        m_DroneInput = asset.FindActionMap("DroneInput", throwIfNotFound: true);
+        m_DroneInput_ThrottleYaw = m_DroneInput.FindAction("ThrottleYaw", throwIfNotFound: true);
+        m_DroneInput_PitchRoll = m_DroneInput.FindAction("PitchRoll", throwIfNotFound: true);
+        m_DroneInput_CameraTilt = m_DroneInput.FindAction("CameraTilt", throwIfNotFound: true);
+        m_DroneInput_DropAmmo = m_DroneInput.FindAction("DropAmmo", throwIfNotFound: true);
+        m_DroneInput_Reset = m_DroneInput.FindAction("Reset", throwIfNotFound: true);
+        m_DroneInput_Reload = m_DroneInput.FindAction("Reload", throwIfNotFound: true);
+        m_DroneInput_ToggleFlightMode = m_DroneInput.FindAction("ToggleFlightMode", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -985,7 +1006,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
 
     ~@InputSystem_Actions()
     {
-        UnityEngine.Debug.Assert(!m_KamikazeDrone.enabled, "This will cause a leak and performance issues, InputSystem_Actions.KamikazeDrone.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_DroneInput.enabled, "This will cause a leak and performance issues, InputSystem_Actions.DroneInput.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
     }
 
@@ -1059,54 +1080,59 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // KamikazeDrone
-    private readonly InputActionMap m_KamikazeDrone;
-    private List<IKamikazeDroneActions> m_KamikazeDroneActionsCallbackInterfaces = new List<IKamikazeDroneActions>();
-    private readonly InputAction m_KamikazeDrone_ThrottleYaw;
-    private readonly InputAction m_KamikazeDrone_PitchRoll;
-    private readonly InputAction m_KamikazeDrone_CameraTilt;
-    private readonly InputAction m_KamikazeDrone_DropAmmo;
-    private readonly InputAction m_KamikazeDrone_Reset;
-    private readonly InputAction m_KamikazeDrone_Reload;
+    // DroneInput
+    private readonly InputActionMap m_DroneInput;
+    private List<IDroneInputActions> m_DroneInputActionsCallbackInterfaces = new List<IDroneInputActions>();
+    private readonly InputAction m_DroneInput_ThrottleYaw;
+    private readonly InputAction m_DroneInput_PitchRoll;
+    private readonly InputAction m_DroneInput_CameraTilt;
+    private readonly InputAction m_DroneInput_DropAmmo;
+    private readonly InputAction m_DroneInput_Reset;
+    private readonly InputAction m_DroneInput_Reload;
+    private readonly InputAction m_DroneInput_ToggleFlightMode;
     /// <summary>
-    /// Provides access to input actions defined in input action map "KamikazeDrone".
+    /// Provides access to input actions defined in input action map "DroneInput".
     /// </summary>
-    public struct KamikazeDroneActions
+    public struct DroneInputActions
     {
         private @InputSystem_Actions m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public KamikazeDroneActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        public DroneInputActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "KamikazeDrone/ThrottleYaw".
+        /// Provides access to the underlying input action "DroneInput/ThrottleYaw".
         /// </summary>
-        public InputAction @ThrottleYaw => m_Wrapper.m_KamikazeDrone_ThrottleYaw;
+        public InputAction @ThrottleYaw => m_Wrapper.m_DroneInput_ThrottleYaw;
         /// <summary>
-        /// Provides access to the underlying input action "KamikazeDrone/PitchRoll".
+        /// Provides access to the underlying input action "DroneInput/PitchRoll".
         /// </summary>
-        public InputAction @PitchRoll => m_Wrapper.m_KamikazeDrone_PitchRoll;
+        public InputAction @PitchRoll => m_Wrapper.m_DroneInput_PitchRoll;
         /// <summary>
-        /// Provides access to the underlying input action "KamikazeDrone/CameraTilt".
+        /// Provides access to the underlying input action "DroneInput/CameraTilt".
         /// </summary>
-        public InputAction @CameraTilt => m_Wrapper.m_KamikazeDrone_CameraTilt;
+        public InputAction @CameraTilt => m_Wrapper.m_DroneInput_CameraTilt;
         /// <summary>
-        /// Provides access to the underlying input action "KamikazeDrone/DropAmmo".
+        /// Provides access to the underlying input action "DroneInput/DropAmmo".
         /// </summary>
-        public InputAction @DropAmmo => m_Wrapper.m_KamikazeDrone_DropAmmo;
+        public InputAction @DropAmmo => m_Wrapper.m_DroneInput_DropAmmo;
         /// <summary>
-        /// Provides access to the underlying input action "KamikazeDrone/Reset".
+        /// Provides access to the underlying input action "DroneInput/Reset".
         /// </summary>
-        public InputAction @Reset => m_Wrapper.m_KamikazeDrone_Reset;
+        public InputAction @Reset => m_Wrapper.m_DroneInput_Reset;
         /// <summary>
-        /// Provides access to the underlying input action "KamikazeDrone/Reload".
+        /// Provides access to the underlying input action "DroneInput/Reload".
         /// </summary>
-        public InputAction @Reload => m_Wrapper.m_KamikazeDrone_Reload;
+        public InputAction @Reload => m_Wrapper.m_DroneInput_Reload;
+        /// <summary>
+        /// Provides access to the underlying input action "DroneInput/ToggleFlightMode".
+        /// </summary>
+        public InputAction @ToggleFlightMode => m_Wrapper.m_DroneInput_ToggleFlightMode;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_KamikazeDrone; }
+        public InputActionMap Get() { return m_Wrapper.m_DroneInput; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -1114,9 +1140,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="KamikazeDroneActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="DroneInputActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(KamikazeDroneActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(DroneInputActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -1124,11 +1150,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="KamikazeDroneActions" />
-        public void AddCallbacks(IKamikazeDroneActions instance)
+        /// <seealso cref="DroneInputActions" />
+        public void AddCallbacks(IDroneInputActions instance)
         {
-            if (instance == null || m_Wrapper.m_KamikazeDroneActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_KamikazeDroneActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_DroneInputActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DroneInputActionsCallbackInterfaces.Add(instance);
             @ThrottleYaw.started += instance.OnThrottleYaw;
             @ThrottleYaw.performed += instance.OnThrottleYaw;
             @ThrottleYaw.canceled += instance.OnThrottleYaw;
@@ -1147,6 +1173,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @ToggleFlightMode.started += instance.OnToggleFlightMode;
+            @ToggleFlightMode.performed += instance.OnToggleFlightMode;
+            @ToggleFlightMode.canceled += instance.OnToggleFlightMode;
         }
 
         /// <summary>
@@ -1155,8 +1184,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="KamikazeDroneActions" />
-        private void UnregisterCallbacks(IKamikazeDroneActions instance)
+        /// <seealso cref="DroneInputActions" />
+        private void UnregisterCallbacks(IDroneInputActions instance)
         {
             @ThrottleYaw.started -= instance.OnThrottleYaw;
             @ThrottleYaw.performed -= instance.OnThrottleYaw;
@@ -1176,15 +1205,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @ToggleFlightMode.started -= instance.OnToggleFlightMode;
+            @ToggleFlightMode.performed -= instance.OnToggleFlightMode;
+            @ToggleFlightMode.canceled -= instance.OnToggleFlightMode;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="KamikazeDroneActions.UnregisterCallbacks(IKamikazeDroneActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="DroneInputActions.UnregisterCallbacks(IDroneInputActions)" />.
         /// </summary>
-        /// <seealso cref="KamikazeDroneActions.UnregisterCallbacks(IKamikazeDroneActions)" />
-        public void RemoveCallbacks(IKamikazeDroneActions instance)
+        /// <seealso cref="DroneInputActions.UnregisterCallbacks(IDroneInputActions)" />
+        public void RemoveCallbacks(IDroneInputActions instance)
         {
-            if (m_Wrapper.m_KamikazeDroneActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_DroneInputActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -1194,21 +1226,21 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="KamikazeDroneActions.AddCallbacks(IKamikazeDroneActions)" />
-        /// <seealso cref="KamikazeDroneActions.RemoveCallbacks(IKamikazeDroneActions)" />
-        /// <seealso cref="KamikazeDroneActions.UnregisterCallbacks(IKamikazeDroneActions)" />
-        public void SetCallbacks(IKamikazeDroneActions instance)
+        /// <seealso cref="DroneInputActions.AddCallbacks(IDroneInputActions)" />
+        /// <seealso cref="DroneInputActions.RemoveCallbacks(IDroneInputActions)" />
+        /// <seealso cref="DroneInputActions.UnregisterCallbacks(IDroneInputActions)" />
+        public void SetCallbacks(IDroneInputActions instance)
         {
-            foreach (var item in m_Wrapper.m_KamikazeDroneActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_DroneInputActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_KamikazeDroneActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_DroneInputActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="KamikazeDroneActions" /> instance referencing this action map.
+    /// Provides a new <see cref="DroneInputActions" /> instance referencing this action map.
     /// </summary>
-    public KamikazeDroneActions @KamikazeDrone => new KamikazeDroneActions(this);
+    public DroneInputActions @DroneInput => new DroneInputActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -1470,11 +1502,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         }
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "KamikazeDrone" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "DroneInput" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="KamikazeDroneActions.AddCallbacks(IKamikazeDroneActions)" />
-    /// <seealso cref="KamikazeDroneActions.RemoveCallbacks(IKamikazeDroneActions)" />
-    public interface IKamikazeDroneActions
+    /// <seealso cref="DroneInputActions.AddCallbacks(IDroneInputActions)" />
+    /// <seealso cref="DroneInputActions.RemoveCallbacks(IDroneInputActions)" />
+    public interface IDroneInputActions
     {
         /// <summary>
         /// Method invoked when associated input action "ThrottleYaw" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
@@ -1518,6 +1550,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnReload(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleFlightMode" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleFlightMode(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

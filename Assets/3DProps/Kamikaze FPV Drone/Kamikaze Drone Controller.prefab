@@ -746,6 +746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::KamikazeDroneController
   m_ReplayModelPrefab: {fileID: 5594078036998244263, guid: 190566f265b59eb4bb407ff3f5ea039b, type: 3}
   m_Model3D: {fileID: 6697248929760923812}
+  m_FlightMode: 0
   m_DroneType: 0
   m_Camera: {fileID: 2036395740773961433}
   m_AttackPrefab: {fileID: 7510066098918893103, guid: db5a842cee47a954babe94230e468493, type: 3}
@@ -761,9 +762,17 @@ MonoBehaviour:
   m_ThrottleMultiplier: 10
   m_MaxVerticalSpeed: 6.5
   m_MinVerticalSpeed: -6.5
-  m_YawStrength: 4
+  m_YawStrength: 6.5
   m_PitchStrength: 3.25
   m_RollStrength: 1.75
+  m_AcroAngularDampening: 2
+  m_AcroLinearDampening: 1
+  m_MaxAngleTilt: 35
+  m_AngleResponsiveness: 1.15
+  m_SelfLevelStrength: 2.5
+  m_MoveForce: 12.5
+  m_AngleAngularDampening: 10
+  m_AngleLinearDampening: 2
   m_BaseDrainRate: 0.5
   m_DrainEfficiency: 1
   m_ThrottleLerpSpeed: 2
@@ -793,8 +802,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8067089, y: 0.38363066, z: 0.6446798}
-  m_Center: {x: -0.00000014901161, y: -0.07169141, z: 0.00059717894}
+  m_Size: {x: 0.59, y: 0.23313951, z: 0.48}
+  m_Center: {x: -0.00000014901161, y: 0.0035541654, z: 0.00059717894}
 --- !u!54 &8432502497563732362
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -804,8 +813,8 @@ Rigidbody:
   m_GameObject: {fileID: 7091461836173577391}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 1
+  m_AngularDamping: 8
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -818,7 +827,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

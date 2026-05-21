@@ -79,7 +79,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd25513a7bf03da4583dbc33b6a3b19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankEnemyController
-  MAX_REPLAY_FRAMES: 350
   m_ReplayModelPrefab: {fileID: 3180788455731276745, guid: fab34e2024f4e2040805c24f00e2148b, type: 3}
   m_Model3D: {fileID: 5817464826614326036}
   m_EnemyType: 0
@@ -109,6 +108,12 @@ MonoBehaviour:
   m_MaxMoveTime: 5
   m_MinIdleTime: 1
   m_MaxIdleTime: 3
+  m_ObstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_DetectionDistance: 7
+  m_AvoidanceForce: 90
+  m_TankWidth: 4
   m_EvadeDistance: 7
   m_EvadeSpeedMultiplier: 1.24
   m_PlayerDrone: {fileID: 0}
@@ -117,7 +122,6 @@ MonoBehaviour:
   m_TrackScrollSpeed: 1.5
   m_fireParticlePrefab: {fileID: 4122213003545672151, guid: a73478fa15f249a43a7f6e91c4349b63, type: 3}
   m_smokeParticlePrefab: {fileID: 6446781554083151525, guid: 7cac4e28673e045428f484129ea4dc58, type: 3}
-  m_FireParticleOffset: {x: 0, y: -1.5, z: 0}
   m_ParticleHoldersTransform: {fileID: 1826545088775061323}
 --- !u!65 &544488126781218604
 BoxCollider:
