@@ -144,7 +144,8 @@ namespace DroneSimulator.DroneControllers
             if (!m_IsPaused && collision.relativeVelocity.magnitude > m_ExplosionCollisionVelocity)
             {
                 // 1. Trigger the grenade explosion at the point of impact
-                if(collision.gameObject.layer == m_EnemyLayerMask && collision.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyController))
+                if(collision.gameObject.layer == m_EnemyLayerMask && collision.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyController)
+                && !enemyController.m_IsDead)
                 {
                     RaiseKilled(enemyController);
                 }

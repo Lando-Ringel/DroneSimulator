@@ -17,7 +17,6 @@ namespace DroneSimulator.EnemyControllers
         [Header("Stats")]
         [SerializeField] private float m_Health = 100f;
 
-
         [Header("Movement")]
         [SerializeField] private float m_MoveSpeed = 3f;
         [SerializeField] private float m_RotationSpeed = 60f; // Lowered slightly for realistic heavy tank mass

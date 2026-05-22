@@ -12,7 +12,7 @@ namespace DroneSimulator.DroneControllers
     {
         [Header("Instant Replay")]
         protected bool m_IsPaused;
-        protected bool m_IsDead;        
+        public bool m_IsDead{get; protected set;}        
         protected Queue<ReplayableState> m_ReplayBuffer = new Queue<ReplayableState>();
         public Queue<ReplayableState> ReplayBuffer
         {

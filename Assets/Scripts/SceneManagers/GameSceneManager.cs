@@ -96,28 +96,6 @@ namespace DroneSimulator.SceneManagers
             OnPaused += enemyController.PauseController;
         }
 
-        // private GameObject SpawnEnemyTank(Vector3 playerPos, float minDistance)
-        // {
-        //     Vector3 spawnPos = playerPos;
-
-        //     for (int i = 0; i < 20; i++)
-        //     {
-        //         Vector3 offset = new Vector3(
-        //             UnityEngine.Random.Range(-50f, 50f),
-        //             0f,
-        //             UnityEngine.Random.Range(-50f, 50f)
-        //         );
-
-        //         Vector3 candidate = playerPos + offset;
-
-        //         if (Vector3.Distance(candidate, playerPos) >= minDistance)
-        //         {
-        //             spawnPos = candidate;
-        //             break;
-        //         }
-        //     }
-        //     return Instantiate(m_EnemyTankControllerPrefab, spawnPos, quaternion.identity);
-        // }
 
         private GameObject SpawnEnemyTank(Vector3 playerPos, float minDistance)
         {

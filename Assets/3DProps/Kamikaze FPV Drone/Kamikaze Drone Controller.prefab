@@ -773,6 +773,8 @@ MonoBehaviour:
   m_MoveForce: 12.5
   m_AngleAngularDampening: 10
   m_AngleLinearDampening: 2
+  m_AngleThrottleMult: 1.45
+  m_AngleYawStrengthMult: 2.1
   m_BaseDrainRate: 0.5
   m_DrainEfficiency: 1
   m_ThrottleLerpSpeed: 2
@@ -802,8 +804,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.59, y: 0.23313951, z: 0.48}
-  m_Center: {x: -0.00000014901161, y: 0.0035541654, z: 0.00059717894}
+  m_Size: {x: 0.4508794, y: 0.16221565, z: 0.5319252}
+  m_Center: {x: -0.0005120337, y: -0.031907767, z: -0.043478817}
 --- !u!54 &8432502497563732362
 Rigidbody:
   m_ObjectHideFlags: 0
