@@ -6,7 +6,6 @@ using DroneSimulator.AttackControllers;
 using DroneSimulator.EnemyControllers;
 using DroneSimulator.SceneManagers;
 using System.Collections.Generic;
-using PSXShadersPro.URP.Demo;
 
 namespace DroneSimulator.DroneControllers
 {
@@ -59,7 +58,6 @@ namespace DroneSimulator.DroneControllers
         private int m_lifeCount;
         [Header("Canvas")]
         [SerializeField] private FPVCanvasUIOrganizer m_FPVCanvasUIOrganizer;
-
         private Vector3 m_StartPosition;
         private Quaternion m_StartRotation;
         // input storage
@@ -68,7 +66,7 @@ namespace DroneSimulator.DroneControllers
         private float m_PitchInput;
         private float m_RollInput;
         private float m_CameraRotationX = 0f; // Track total rotation
-
+        private InputAction currentInputAction;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Awake()
         {
@@ -79,7 +77,7 @@ namespace DroneSimulator.DroneControllers
             m_Rigidbody = GetComponent<Rigidbody>();
             // m_Rigidbody.angularDamping = 2f;
             // m_Rigidbody.linearDamping = 1f; // helps buttress against falling too fast
-            SetFlightMode(FlightMode.Angle);
+            
             LoadAmmo();
         }
 
@@ -93,18 +91,19 @@ namespace DroneSimulator.DroneControllers
             m_inputSystem_Actions.DroneInput.Reset.performed += CallResetDrone;
             m_inputSystem_Actions.DroneInput.Reload.performed += CallReloadGrenade;
             m_inputSystem_Actions.DroneInput.ToggleFlightMode.performed += ToggleFlightMode;
+            SetFlightMode(FlightMode.Angle);
         }
+
+
 
         void Update()
         {
             if(m_IsDead || m_IsPaused)
                 return;
-
             Vector2 throttleYaw = m_inputSystem_Actions.DroneInput.ThrottleYaw.ReadValue<Vector2>();
-            Vector2 pitchRoll = m_inputSystem_Actions.DroneInput.PitchRoll.ReadValue<Vector2>();
+            GetFlightMode();
 
-            m_PitchInput = pitchRoll.y;
-            m_RollInput = pitchRoll.x;
+            // pitchRoll = m_inputSystem_Actions.DroneInput.PitchRoll.ReadValue<Vector2>();
             m_ThrottleInput = Mathf.MoveTowards(m_ThrottleInput, throttleYaw.y, Time.deltaTime * m_ThrottleLerpSpeed);
             m_YawInput = Mathf.MoveTowards(m_YawInput, throttleYaw.x, Time.deltaTime * m_YawLerpSpeed);
             HandleCameraRotation();
@@ -122,7 +121,6 @@ namespace DroneSimulator.DroneControllers
             if(m_IsDead || m_IsPaused)
                 return;
 
-            // ApplyFlightPhysics();
             switch(m_FlightMode)
             {
                 case FlightMode.Acro:
@@ -215,33 +213,51 @@ namespace DroneSimulator.DroneControllers
         private void SetFlightMode(FlightMode newMode)
         {
             m_FlightMode = newMode;
-
             switch(m_FlightMode)
             {
                 case FlightMode.Acro:
 
                     m_Rigidbody.angularDamping = m_AcroAngularDampening;
-                    m_Rigidbody.linearDamping = m_AcroLinearDampening;
-
+                    m_Rigidbody.linearDamping = m_AcroLinearDampening;        
                     m_FPVCanvasUIOrganizer.UpdateDroneAlertText(
                         "ACRO MODE",
                         Color.red
                     );
-
                     break;
 
                 case FlightMode.Angle:
+
                     m_Rigidbody.angularDamping = m_AngleAngularDampening;
                     m_Rigidbody.linearDamping = m_AngleLinearDampening;                    
-
                     m_FPVCanvasUIOrganizer.UpdateDroneAlertText(
                         "ANGLE MODE",
                         Color.cyan
                     );
 
-                    break;
+                break;
             }
+        }
+        private Vector2 GetFlightMode()
+        {
+            Vector2 pitchRoll = Vector2.zero;
+            switch(m_FlightMode)
+            {
+                case FlightMode.Acro:
+                    pitchRoll = m_inputSystem_Actions.DroneInput.PitchRollMouse.ReadValue<Vector2>();
+                    m_PitchInput = pitchRoll.y;
+                    m_RollInput = pitchRoll.x;
+
+                    break;
+
+                case FlightMode.Angle:
+                    pitchRoll = m_inputSystem_Actions.DroneInput.PitchRollKeyboard.ReadValue<Vector2>();
+                    m_PitchInput = pitchRoll.y;
+                    m_RollInput = pitchRoll.x;
+                    break;
+            }    
+            return pitchRoll;
         }        
+
 
         public override void LoadAmmo(string alertText = "")
         {
@@ -280,7 +296,7 @@ namespace DroneSimulator.DroneControllers
             // Attach to holder
             m_GrenadeObj.transform.parent = m_GrenadeHolder;
             m_GrenadeObj.transform.localPosition = Vector3.zero;
-            m_GrenadeObj.transform.localEulerAngles = new Vector3(90, 0, 0);
+            m_GrenadeObj.transform.localEulerAngles = new Vector3(0, 0, 0);
 
             // Reset Claws to closed position
             m_LeftClaw.localRotation = Quaternion.Euler(Vector3.zero);

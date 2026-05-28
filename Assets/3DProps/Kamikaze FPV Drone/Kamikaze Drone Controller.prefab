@@ -1009,6 +1009,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kamikaze FPV Drone 3D Model
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0769a30afcdc21845a8b6a383c12b675, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1007170593823957985, guid: 0769a30afcdc21845a8b6a383c12b675, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 59.18786

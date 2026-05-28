@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fc7f29a42ffe4114b8cf422ca3d36423
+timeCreated: 1539172527
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Grass/Prefabs
+    Flowers/prefab_flower_sunroot_01_1.prefab
+  uploadId: 885180

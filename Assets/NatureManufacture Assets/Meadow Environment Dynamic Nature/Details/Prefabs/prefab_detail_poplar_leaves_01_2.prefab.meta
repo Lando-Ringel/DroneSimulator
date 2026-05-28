@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: e9d15e5c6eb722445bc57da914fae55b
+timeCreated: 1539158005
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Details/Prefabs/prefab_detail_poplar_leaves_01_2.prefab
+  uploadId: 885180

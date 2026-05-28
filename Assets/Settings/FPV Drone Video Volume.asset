@@ -1,5 +1,27 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8475008299216535012
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LiftGammaGain
+  active: 1
+  lift:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0.0311042}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: -0.07082152}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0.05359528}
 --- !u!114 &-8374069064906259272
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -18,7 +40,7 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.885
+    m_Value: 0.953
   response:
     m_OverrideState: 1
     m_Value: 0.097
@@ -201,6 +223,8 @@ MonoBehaviour:
   - {fileID: -2510402209159017704}
   - {fileID: -8374069064906259272}
   - {fileID: 6819383884256800273}
+  - {fileID: -8475008299216535012}
+  - {fileID: 5066825343191650369}
   - {fileID: 3254276401935873180}
 --- !u!114 &2182205748910702091
 MonoBehaviour:
@@ -382,6 +406,25 @@ MonoBehaviour:
     m_Value: 1
   enableInterlacing:
     m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &5066825343191650369
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
+  m_Name: WhiteBalance
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.WhiteBalance
+  active: 1
+  temperature:
+    m_OverrideState: 1
+    m_Value: 8
+  tint:
+    m_OverrideState: 0
     m_Value: 0
 --- !u!114 &6819383884256800273
 MonoBehaviour:

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d6fc30e0bdb800048911a0a8c7167cd9
+timeCreated: 1539172401
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Grass/Prefabs
+    Flowers/prefab_flower_bouncing_bet_01_1.prefab
+  uploadId: 885180

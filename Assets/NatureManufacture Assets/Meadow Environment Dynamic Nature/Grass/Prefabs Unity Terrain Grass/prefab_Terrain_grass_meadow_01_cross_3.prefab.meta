@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e808f9d5a58db1f428805e6617c89b52
+timeCreated: 1539172792
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Grass/Prefabs
+    Unity Terrain Grass/prefab_Terrain_grass_meadow_01_cross_3.prefab
+  uploadId: 885180

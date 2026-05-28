@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1d5d1ff281631e444b47dc401b08d728
+timeCreated: 1538486394
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Trees/VS
+    Prefabs/VS_prefab_00_Poplar_plant_A.prefab
+  uploadId: 885180

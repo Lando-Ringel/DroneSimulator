@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a9e1cb4d79e35ba4fabb7122eb5f495a
+timeCreated: 1540376784
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Fence/Fence
+    System Prefabs/prefab_wood_fence_type_03_A_post.prefab
+  uploadId: 885180

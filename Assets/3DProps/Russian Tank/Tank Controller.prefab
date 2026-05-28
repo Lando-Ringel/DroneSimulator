@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6214388070418732601}
   - component: {fileID: 544488126781218604}
   - component: {fileID: 4375857600797292797}
+  - component: {fileID: 4254495111469122550}
   m_Layer: 6
   m_Name: Tank Controller
   m_TagString: Untagged
@@ -82,6 +83,7 @@ MonoBehaviour:
   m_ReplayModelPrefab: {fileID: 3180788455731276745, guid: fab34e2024f4e2040805c24f00e2148b, type: 3}
   m_Model3D: {fileID: 5817464826614326036}
   m_EnemyType: 0
+  m_Turret: {fileID: 5817464826614169456}
   m_Wheels:
   - {fileID: 5817464826614169424}
   - {fileID: 5817464826614169426}
@@ -100,29 +102,29 @@ MonoBehaviour:
   - {fileID: 5817464826614169420}
   - {fileID: 5817464826614169422}
   m_TankTrackRenderer: {fileID: 3029989263591553440}
-  m_Turret: {fileID: 5817464826614169456}
-  m_Health: 10
   m_MoveSpeed: 2
   m_RotationSpeed: 90
+  m_Acceleration: 4
+  m_GroundCheckDistance: 6
+  m_GroundAlignSpeed: 8
+  m_GroundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  m_ObstacleMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_ObstacleDistance: 5
+  m_ObstacleRadius: 1.25
+  m_AvoidTurnSpeed: 120
   m_MinMoveTime: 2
   m_MaxMoveTime: 5
   m_MinIdleTime: 1
   m_MaxIdleTime: 3
-  m_ObstacleLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  m_DetectionDistance: 7
-  m_AvoidanceForce: 90
-  m_TankWidth: 4
-  m_EvadeDistance: 7
-  m_EvadeSpeedMultiplier: 1.24
-  m_PlayerDrone: {fileID: 0}
-  m_TurretLookSpeed: 120
+  m_EvadeDistance: 20
+  m_EvadeSpeedMultiplier: 1.75
+  m_TurretRotationSpeed: 120
   m_WheelSpinSpeed: 360
   m_TrackScrollSpeed: 1.5
-  m_fireParticlePrefab: {fileID: 4122213003545672151, guid: a73478fa15f249a43a7f6e91c4349b63, type: 3}
-  m_smokeParticlePrefab: {fileID: 6446781554083151525, guid: 7cac4e28673e045428f484129ea4dc58, type: 3}
-  m_ParticleHoldersTransform: {fileID: 1826545088775061323}
 --- !u!65 &544488126781218604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -165,6 +167,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.6016552, y: 0.9607887, z: 3.4087205}
   m_Center: {x: -0.024978042, y: 2.0196056, z: -0.16206908}
+--- !u!54 &4254495111469122550
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3931880235320956108}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4172066455824685486
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,15 +508,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 6118207091096d94482fb6be313ac6fc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 6118207091096d94482fb6be313ac6fc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 6118207091096d94482fb6be313ac6fc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 6118207091096d94482fb6be313ac6fc, type: 3}
       propertyPath: m_LocalPosition.x

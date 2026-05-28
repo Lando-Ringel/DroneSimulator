@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 54ad073294fda8c4b9565db72fb1c4cc
+timeCreated: 1540325607
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Bushes/Prefabs/prefab_maple_bush_02.prefab
+  uploadId: 885180

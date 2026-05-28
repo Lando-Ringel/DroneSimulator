@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 65bed4b0ea9ee8e40bf2ebf26cf5855d
+timeCreated: 1538130186
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Trees/Models/Materials/M_trunk_poplar.mat
+  uploadId: 885180

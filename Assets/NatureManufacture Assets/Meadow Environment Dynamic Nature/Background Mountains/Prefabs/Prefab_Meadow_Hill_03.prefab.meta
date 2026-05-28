@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 10bbfad945cf4024dbff90e42a6f8df5
+timeCreated: 1540497998
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Background
+    Mountains/Prefabs/Prefab_Meadow_Hill_03.prefab
+  uploadId: 885180

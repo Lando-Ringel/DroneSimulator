@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c6eeee320da80e0469f1f143fb8ad18a
+timeCreated: 1539172401
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Grass/Prefabs
+    Unity Terrain Flowers/prefab_Terrain_flower_bouncing_bet_01_1.prefab
+  uploadId: 885180

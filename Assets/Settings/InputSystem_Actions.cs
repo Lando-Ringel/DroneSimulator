@@ -102,9 +102,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PitchRoll"",
+                    ""name"": ""PitchRollKeyboard"",
                     ""type"": ""Value"",
                     ""id"": ""6b444451-8a00-4d00-a97e-f47457f736a8"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PitchRollMouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""d31f384b-d4f3-40f2-a912-050598073359"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -235,46 +244,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""c1f7a91b-d0fd-4a62-997e-7fb9b69bf235"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""PitchRoll"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""PitchRoll"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3e5f5442-8668-4b27-a940-df99bad7e831"",
-                    ""path"": ""<Joystick>/{Hatswitch}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""PitchRoll"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""2D Vector"",
                     ""id"": ""eb680ded-94ef-45a4-bd22-1e210c9a887d"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PitchRoll"",
+                    ""action"": ""PitchRollKeyboard"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -284,8 +260,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PitchRoll"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""PitchRollKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -295,8 +271,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PitchRoll"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""PitchRollKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -306,8 +282,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PitchRoll"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""PitchRollKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -317,8 +293,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PitchRoll"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""PitchRollKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -396,6 +372,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleFlightMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b4b570a-e5bf-4e8d-a5e5-43758ddd549f"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PitchRollMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -984,7 +971,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         // DroneInput
         m_DroneInput = asset.FindActionMap("DroneInput", throwIfNotFound: true);
         m_DroneInput_ThrottleYaw = m_DroneInput.FindAction("ThrottleYaw", throwIfNotFound: true);
-        m_DroneInput_PitchRoll = m_DroneInput.FindAction("PitchRoll", throwIfNotFound: true);
+        m_DroneInput_PitchRollKeyboard = m_DroneInput.FindAction("PitchRollKeyboard", throwIfNotFound: true);
+        m_DroneInput_PitchRollMouse = m_DroneInput.FindAction("PitchRollMouse", throwIfNotFound: true);
         m_DroneInput_CameraTilt = m_DroneInput.FindAction("CameraTilt", throwIfNotFound: true);
         m_DroneInput_DropAmmo = m_DroneInput.FindAction("DropAmmo", throwIfNotFound: true);
         m_DroneInput_Reset = m_DroneInput.FindAction("Reset", throwIfNotFound: true);
@@ -1084,7 +1072,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_DroneInput;
     private List<IDroneInputActions> m_DroneInputActionsCallbackInterfaces = new List<IDroneInputActions>();
     private readonly InputAction m_DroneInput_ThrottleYaw;
-    private readonly InputAction m_DroneInput_PitchRoll;
+    private readonly InputAction m_DroneInput_PitchRollKeyboard;
+    private readonly InputAction m_DroneInput_PitchRollMouse;
     private readonly InputAction m_DroneInput_CameraTilt;
     private readonly InputAction m_DroneInput_DropAmmo;
     private readonly InputAction m_DroneInput_Reset;
@@ -1106,9 +1095,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @ThrottleYaw => m_Wrapper.m_DroneInput_ThrottleYaw;
         /// <summary>
-        /// Provides access to the underlying input action "DroneInput/PitchRoll".
+        /// Provides access to the underlying input action "DroneInput/PitchRollKeyboard".
         /// </summary>
-        public InputAction @PitchRoll => m_Wrapper.m_DroneInput_PitchRoll;
+        public InputAction @PitchRollKeyboard => m_Wrapper.m_DroneInput_PitchRollKeyboard;
+        /// <summary>
+        /// Provides access to the underlying input action "DroneInput/PitchRollMouse".
+        /// </summary>
+        public InputAction @PitchRollMouse => m_Wrapper.m_DroneInput_PitchRollMouse;
         /// <summary>
         /// Provides access to the underlying input action "DroneInput/CameraTilt".
         /// </summary>
@@ -1158,9 +1151,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @ThrottleYaw.started += instance.OnThrottleYaw;
             @ThrottleYaw.performed += instance.OnThrottleYaw;
             @ThrottleYaw.canceled += instance.OnThrottleYaw;
-            @PitchRoll.started += instance.OnPitchRoll;
-            @PitchRoll.performed += instance.OnPitchRoll;
-            @PitchRoll.canceled += instance.OnPitchRoll;
+            @PitchRollKeyboard.started += instance.OnPitchRollKeyboard;
+            @PitchRollKeyboard.performed += instance.OnPitchRollKeyboard;
+            @PitchRollKeyboard.canceled += instance.OnPitchRollKeyboard;
+            @PitchRollMouse.started += instance.OnPitchRollMouse;
+            @PitchRollMouse.performed += instance.OnPitchRollMouse;
+            @PitchRollMouse.canceled += instance.OnPitchRollMouse;
             @CameraTilt.started += instance.OnCameraTilt;
             @CameraTilt.performed += instance.OnCameraTilt;
             @CameraTilt.canceled += instance.OnCameraTilt;
@@ -1190,9 +1186,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @ThrottleYaw.started -= instance.OnThrottleYaw;
             @ThrottleYaw.performed -= instance.OnThrottleYaw;
             @ThrottleYaw.canceled -= instance.OnThrottleYaw;
-            @PitchRoll.started -= instance.OnPitchRoll;
-            @PitchRoll.performed -= instance.OnPitchRoll;
-            @PitchRoll.canceled -= instance.OnPitchRoll;
+            @PitchRollKeyboard.started -= instance.OnPitchRollKeyboard;
+            @PitchRollKeyboard.performed -= instance.OnPitchRollKeyboard;
+            @PitchRollKeyboard.canceled -= instance.OnPitchRollKeyboard;
+            @PitchRollMouse.started -= instance.OnPitchRollMouse;
+            @PitchRollMouse.performed -= instance.OnPitchRollMouse;
+            @PitchRollMouse.canceled -= instance.OnPitchRollMouse;
             @CameraTilt.started -= instance.OnCameraTilt;
             @CameraTilt.performed -= instance.OnCameraTilt;
             @CameraTilt.canceled -= instance.OnCameraTilt;
@@ -1516,12 +1515,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnThrottleYaw(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "PitchRoll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "PitchRollKeyboard" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPitchRoll(InputAction.CallbackContext context);
+        void OnPitchRollKeyboard(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PitchRollMouse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPitchRollMouse(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "CameraTilt" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

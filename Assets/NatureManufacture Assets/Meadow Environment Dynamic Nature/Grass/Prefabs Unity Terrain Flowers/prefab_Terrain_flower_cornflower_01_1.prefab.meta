@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bebaa4112c910fa4585a4389daeeaab3
+timeCreated: 1539172268
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Grass/Prefabs
+    Unity Terrain Flowers/prefab_Terrain_flower_cornflower_01_1.prefab
+  uploadId: 885180

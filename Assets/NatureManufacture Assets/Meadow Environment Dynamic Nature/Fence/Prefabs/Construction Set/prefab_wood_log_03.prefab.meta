@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9c30840f98cdf584f849d6308790003f
+timeCreated: 1538400411
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Fence/Prefabs/Construction
+    Set/prefab_wood_log_03.prefab
+  uploadId: 885180

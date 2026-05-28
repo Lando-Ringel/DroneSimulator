@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 113a6af794b2f604c845518b6d1a645e
+timeCreated: 1539157978
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Details/Prefabs/prefab_detail_meadow_plants_01.prefab
+  uploadId: 885180

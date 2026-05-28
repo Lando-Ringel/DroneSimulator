@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4512dafca02e30f4a9fabbbdfae5b351
+timeCreated: 1540497309
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Background
+    Mountains/Models/Materials/M_Meadow_Hill_05.mat
+  uploadId: 885180

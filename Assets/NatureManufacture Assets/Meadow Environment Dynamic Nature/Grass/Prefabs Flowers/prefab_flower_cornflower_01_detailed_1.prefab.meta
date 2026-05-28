@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b3d9c1e07ba0a1d448ed3ff7d2404031
+timeCreated: 1539172257
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Grass/Prefabs
+    Flowers/prefab_flower_cornflower_01_detailed_1.prefab
+  uploadId: 885180

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: eb8d31763f2c0064b9b86dce1f6b587f
+timeCreated: 1538400197
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Fence/Prefabs/prefab_wood_fence_type_02_B.prefab
+  uploadId: 885180

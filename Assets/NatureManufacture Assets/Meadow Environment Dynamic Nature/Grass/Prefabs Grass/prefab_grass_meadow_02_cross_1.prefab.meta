@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d6f1facda5047e4469f18d2d5e4deef4
+timeCreated: 1539172767
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Grass/Prefabs
+    Grass/prefab_grass_meadow_02_cross_1.prefab
+  uploadId: 885180

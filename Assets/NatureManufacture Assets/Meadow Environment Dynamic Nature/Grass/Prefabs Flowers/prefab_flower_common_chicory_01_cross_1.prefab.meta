@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 28caa95f267a7be4d82ebd5123bcf5a6
+timeCreated: 1539172330
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Grass/Prefabs
+    Flowers/prefab_flower_common_chicory_01_cross_1.prefab
+  uploadId: 885180

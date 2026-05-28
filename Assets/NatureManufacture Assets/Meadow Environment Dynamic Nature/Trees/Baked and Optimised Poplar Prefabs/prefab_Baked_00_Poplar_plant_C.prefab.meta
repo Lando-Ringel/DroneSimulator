@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ed33108025b17bb47b1e57c0a30b7b1c
+timeCreated: 1538486791
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Trees/Baked
+    and Optimised Poplar Prefabs/prefab_Baked_00_Poplar_plant_C.prefab
+  uploadId: 885180

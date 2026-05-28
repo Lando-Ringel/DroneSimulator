@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d6e808ec54399bc4d95831a9d86d4db1
+timeCreated: 1539172440
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Grass/Prefabs
+    Flowers/prefab_flower_goldenrod_01_3.prefab
+  uploadId: 885180

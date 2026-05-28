@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 3c4a220c900095d4f9401b6441dbd148
+timeCreated: 1540474885
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Bushes/Prefabs/prefab_grey_willow_01.prefab
+  uploadId: 885180

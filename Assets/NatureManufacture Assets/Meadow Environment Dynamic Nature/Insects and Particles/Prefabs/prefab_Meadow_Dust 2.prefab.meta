@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d51110f852e06914d8b6f592e01d6bd6
+timeCreated: 1539165769
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 132195
+  packageName: Meadow Environment - Dynamic Nature
+  packageVersion: 3.0.4
+  assetPath: Assets/NatureManufacture Assets/Meadow Environment Dynamic Nature/Insects
+    and Particles/Prefabs/prefab_Meadow_Dust 2.prefab
+  uploadId: 885180

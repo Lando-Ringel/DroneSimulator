@@ -16,9 +16,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "PitchRoll",
+                    "name": "PitchRollKeyboard",
                     "type": "Value",
                     "id": "6b444451-8a00-4d00-a97e-f47457f736a8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PitchRollMouse",
+                    "type": "Value",
+                    "id": "d31f384b-d4f3-40f2-a912-050598073359",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -149,46 +158,13 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "PitchRoll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
-                    "action": "PitchRoll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3e5f5442-8668-4b27-a940-df99bad7e831",
-                    "path": "<Joystick>/{Hatswitch}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "PitchRoll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "2D Vector",
                     "id": "eb680ded-94ef-45a4-bd22-1e210c9a887d",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PitchRoll",
+                    "action": "PitchRollKeyboard",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -198,8 +174,8 @@
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "PitchRoll",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "PitchRollKeyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -209,8 +185,8 @@
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "PitchRoll",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "PitchRollKeyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -220,8 +196,8 @@
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "PitchRoll",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "PitchRollKeyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -231,8 +207,8 @@
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "PitchRoll",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "PitchRollKeyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -310,6 +286,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleFlightMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b4b570a-e5bf-4e8d-a5e5-43758ddd549f",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PitchRollMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

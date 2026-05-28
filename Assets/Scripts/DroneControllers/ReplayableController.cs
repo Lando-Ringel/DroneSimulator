@@ -18,7 +18,7 @@ namespace DroneSimulator.DroneControllers
         {
             get{return m_ReplayBuffer;}
         }
-        protected const int MAX_REPLAY_FRAMES = 350;
+        protected const int MAX_REPLAY_FRAMES = 150;
         [SerializeField] protected GameObject m_ReplayModelPrefab;
         public GameObject m_ReplayModelObject {get; protected set; }
         public GameObject ReplayModelPrefab
