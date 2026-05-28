@@ -9,6 +9,7 @@
 [Ll]ogs/
 [Mm]emoryCaptures/
 [Rr]ecordings/
+*.unitypackage
 
 # =========================
 # Asset Store tools cache
